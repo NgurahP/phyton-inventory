@@ -49,20 +49,20 @@ def cekHuruf() :
 
 
 # function rumus
-def konversiDariCelcius(suhuAwal, konversi, ):
+def konversiDariCelcius(suhuAwal, konversi):
     if konversi == "r":
-        hasil = 0.8*suhuAwal
+        hasil = float(0.8*suhuAwal)
         print("hasil konversi suhu = ", hasil)
     elif konversi == "k":
-        hasil = suhuAwal+273.15
+        hasil = float(suhuAwal+273.15)
         print("hasil konversi suhu = ", hasil)
     elif konversi == "f":
-        hasil = 1.8*suhuAwal+32
+        hasil = (1.8*suhuAwal+32)
         print("hasil konversi suhu = ", hasil)
     else:
         print("aku pergi")
     
-    print("gak tau mau ngisi apa")
+
     
 def koversiDariReamur(suhuAwal, konversi):
     if konversi == "c":
@@ -77,7 +77,7 @@ def koversiDariReamur(suhuAwal, konversi):
     else:
         print("aku pergi")
     
-    print("gak tau mau ngisi apa")
+
 
 def konversiDariKelvin(suhuAwal, konversi):
     if konversi == "c":
@@ -94,7 +94,7 @@ def konversiDariKelvin(suhuAwal, konversi):
     else:
         print("aku pergi")
     
-    print("gak tau mau ngisi apa")
+
 
 def konversiDariFarenheit(suhuAwal, konversi):
     hasilKurang = suhuAwal - 32
@@ -110,7 +110,7 @@ def konversiDariFarenheit(suhuAwal, konversi):
     else:
         print("aku pergi")
     
-    print("gak tau mau ngisi apa")
+
 
 def konversiSuhu() :
     print("pilih satuan suhu yang ingin di konversi \n =>(C, F, R, K)<= \n")
@@ -124,6 +124,7 @@ def konversiSuhu() :
         else:
             suhuAwal = input("masukan angka suhu yang ingin di konversi : ")
             if suhuAwal.isdigit():
+                suhuAwal = float(suhuAwal)
                 if cekSuhu == "c":
                     konversiDariCelcius(suhuAwal=suhuAwal, konversi=cekKonversi)
                 elif cekSuhu == "r":
