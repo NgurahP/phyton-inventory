@@ -52,7 +52,7 @@ def cekHuruf() :
 def konversiDariCelcius(suhuAwal, konversi):
     if konversi == "r":
         hasil = float(0.8*suhuAwal)
-        print("hasil konversi suhu = ", hasil)
+        print("hasil konversi  suhu = ", hasil)
     elif konversi == "k":
         hasil = float(suhuAwal+273.15)
         print("hasil konversi suhu = ", hasil)
@@ -140,7 +140,15 @@ def konversiSuhu() :
     else:
         print("masukkan satuan suhu yang benar")
     
+def tabelPerkalian():
+    for i in range(1,1001):
+        for j in range(1,11):
+            print(i ," x ", j ," = ", i * j, "\n")
+        print(i,"\n")
+    
+
 # cekHuruf()
 # genapGanjil()
 # kalkulator()
-konversiSuhu()
+# konversiSuhu()
+tabelPerkalian()
