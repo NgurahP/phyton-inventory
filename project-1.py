@@ -1,3 +1,5 @@
+import random
+
 def kalkulator():
     angka1 = input("Masukkan angka = ")
     angka2 = input("Masukkan angka = ")
@@ -146,9 +148,27 @@ def tabelPerkalian():
             print(i ," x ", j ," = ", i * j, "\n")
         print(i,"\n")
     
+def gambling():
+    fate = input(int("Masukan angka = "))
+    pull = random.sample(range(1, 11), 5)
+    char = random.randint(1,100)
+    while pull != char:
+
+
+def asepTelat():
+    nama = input(str("masukkan nama anda = "))
+    if nama == "asep":
+        print("kamu telat")
+    else:
+        while nama != "asep" :
+            nama = input("masukan nama anda : ")
+        if nama == "asep" :
+            print("kamu telat")
+    
 
 # cekHuruf()
 # genapGanjil()
 # kalkulator()
 # konversiSuhu()
-tabelPerkalian()
+# tabelPerkalian()
+# gambling()
