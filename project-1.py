@@ -148,11 +148,57 @@ def tabelPerkalian():
             print(i ," x ", j ," = ", i * j, "\n")
         print(i,"\n")
     
-def gambling():
-    fate = input(int("Masukan angka = "))
-    pull = random.sample(range(1, 11), 5)
-    char = random.randint(1,100)
-    while pull != char:
+# def Gacha():
+#     fate = input(int("Masukan angka = "))
+#     pull = random.sample(range(1, 101), fate)
+#     char = random.randint(1,100)
+#     while pull != char:
+
+def Gacha():
+   # Inisialisasi probabilitas dan percobaan
+    probability = 0.01  # 1%
+    attempts = 0
+    rate = random.randint(1,3)
+
+    while True:
+        user_input = input("Masukkan jumlah percobaan gacha (1-10) atau 'n' untuk keluar: ")
+        
+        if user_input.lower() == 'n':
+            print("Terima kasih telah bermain!")
+            break
+        
+        try:
+            num_attempts = int(user_input)
+            if num_attempts < 1 or num_attempts > 10:
+                print("Silakan masukkan angka antara 1 dan 10.")
+                continue
+        except ValueError:
+            print("Input tidak valid. Silakan masukkan angka antara 1 dan 10.")
+            continue
+        
+        for _ in range(num_attempts):
+            attempts += 1
+            
+            if random.random() < probability:
+                probability = 0.01
+                attempts = 0
+                print(f"Selamat! Anda menang pada percobaan ke-{attempts} dengan probabilitas {probability * 100:.2f}%.")
+                if rate == 1:
+                    print(f"You wim but at what cost")
+                    rate = random.randint(2,3)
+                elif rate == 2:
+                    print(f"so close")
+                    rate = 3
+                else:
+                    print(f"damn")
+                    rate = random.randint(1,3)
+                break
+            else:
+                print(f"Sayang sekali, Anda tidak menang pada percobaan ke-{attempts}.")
+        
+        if attempts >= 70:
+            probability = min(probability + 0.01 * num_attempts, 1.0)
+
 
 
 def asepTelat():
@@ -165,10 +211,16 @@ def asepTelat():
         if nama == "asep" :
             print("kamu telat")
     
+def arrayMahasiswa():
+    mahasiswa = ["Ngurah", "Putra", "Asterithon", "Andika"]
 
+    for mhs in mahasiswa:
+        print(mhs)
+    
 # cekHuruf()
 # genapGanjil()
 # kalkulator()
 # konversiSuhu()
 # tabelPerkalian()
-# gambling()
+Gacha()
+# arrayMahasiswa()
