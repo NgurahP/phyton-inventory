@@ -228,13 +228,13 @@ def toko():
 
     for i in range (penjualan_seminggu):
         hasil_penjualan = int(input(f"hasil penjualan hari ke{i+1} = "))
-        penjualan.append(penjualan)
+        penjualan.append(hasil_penjualan)
 
-    sort_penjualan = penjualan.sort(reverse=True)
-    penjualan_tertingi = sort_penjualan[0]
-    penjualan_terendah = sort_penjualan[6]
-    total_penjualan = sum(sort_penjualan)
-    rata_penjualan = total_penjualan/7
+    penjualan.sort(reverse=True)
+    penjualan_tertingi = penjualan[0]
+    penjualan_terendah = penjualan[-1]
+    total_penjualan = sum(penjualan)
+    rata_penjualan = total_penjualan/penjualan_seminggu
 
     print(f"penjualan tertinggi = {penjualan_tertingi}")
     print(f"penjualan terendah = {penjualan_terendah}")
