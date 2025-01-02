@@ -213,14 +213,40 @@ def asepTelat():
     
 def arrayMahasiswa():
     mahasiswa = ["Ngurah", "Putra", "Asterithon", "Andika"]
-
+    mahasiswa.clear()
+    mahasiswa.append("Ngurah Putra")
+    mahasiswa.append("Amerta")
+    mahasiswa.insert(0,"Gede")
+    mahasiswa.remove("Gede")
+    mahasiswa.sort()
     for mhs in mahasiswa:
         print(mhs)
     
+def toko():
+    penjualan = []
+    penjualan_seminggu = 7
+
+    for i in range (penjualan_seminggu):
+        hasil_penjualan = int(input(f"hasil penjualan hari ke{i+1} = "))
+        penjualan.append(penjualan)
+
+    sort_penjualan = penjualan.sort(reverse=True)
+    penjualan_tertingi = sort_penjualan[0]
+    penjualan_terendah = sort_penjualan[6]
+    total_penjualan = sum(sort_penjualan)
+    rata_penjualan = total_penjualan/7
+
+    print(f"penjualan tertinggi = {penjualan_tertingi}")
+    print(f"penjualan terendah = {penjualan_terendah}")
+    print(f"total penjualan = {total_penjualan}")
+    print(f"rata rata penjualan = {rata_penjualan}")
+
+
 # cekHuruf()
 # genapGanjil()
 # kalkulator()
 # konversiSuhu()
 # tabelPerkalian()
-Gacha()
+# Gacha()
 # arrayMahasiswa()
+toko()
