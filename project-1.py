@@ -227,19 +227,27 @@ def toko():
     penjualan_seminggu = 7
 
     for i in range (penjualan_seminggu):
-        hasil_penjualan = int(input(f"hasil penjualan hari ke{i+1} = "))
+        hasil_penjualan = int(input(f"hasil penjualan hari ke - {i+1} = "))
         penjualan.append(hasil_penjualan)
 
-    penjualan.sort(reverse=True)
-    penjualan_tertingi = penjualan[0]
-    penjualan_terendah = penjualan[-1]
+    penjualan_tertingi = max(penjualan)
+    penjualan_terendah = min(penjualan)
     total_penjualan = sum(penjualan)
-    rata_penjualan = total_penjualan/penjualan_seminggu
+    rata_penjualan = int(total_penjualan/penjualan_seminggu)
 
-    print(f"penjualan tertinggi = {penjualan_tertingi}")
-    print(f"penjualan terendah = {penjualan_terendah}")
-    print(f"total penjualan = {total_penjualan}")
-    print(f"rata rata penjualan = {rata_penjualan}")
+    print(f"penjualan tertinggi = Rp.{penjualan_tertingi}.000")
+    print(f"penjualan terendah = Rp.{penjualan_terendah}.000")
+    print(f"total penjualan = Rp.{total_penjualan}.000")
+    print(f"rata rata penjualan = Rp.{rata_penjualan}.000")
+
+def anak_ayam():
+    ayam = 10
+    while ayam > 0:
+        print(f"Anak ayam ada {ayam} \n turun satu tinggal {ayam-1} \n")
+        ayam = ayam -1
+        if ayam == 0:
+            print(f"sisa induknya")
+            break
 
 
 # cekHuruf()
@@ -249,4 +257,5 @@ def toko():
 # tabelPerkalian()
 # Gacha()
 # arrayMahasiswa()
-toko()
+# toko()
+anak_ayam()
