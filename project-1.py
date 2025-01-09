@@ -63,9 +63,7 @@ def konversiDariCelcius(suhuAwal, konversi):
         print("hasil konversi suhu = ", hasil)
     else:
         print("aku pergi")
-    
 
-    
 def koversiDariReamur(suhuAwal, konversi):
     if konversi == "c":
         hasil = 1.25*suhuAwal
@@ -78,8 +76,6 @@ def koversiDariReamur(suhuAwal, konversi):
         print("hasil konversi suhu = ", hasil)
     else:
         print("aku pergi")
-    
-
 
 def konversiDariKelvin(suhuAwal, konversi):
     if konversi == "c":
@@ -95,8 +91,6 @@ def konversiDariKelvin(suhuAwal, konversi):
         print("hasil konversi suhu = ", hasil)
     else:
         print("aku pergi")
-    
-
 
 def konversiDariFarenheit(suhuAwal, konversi):
     hasilKurang = suhuAwal - 32
@@ -111,8 +105,6 @@ def konversiDariFarenheit(suhuAwal, konversi):
         print("hasil konversi suhu = ", hasil)
     else:
         print("aku pergi")
-    
-
 
 def konversiSuhu() :
     print("pilih satuan suhu yang ingin di konversi \n =>(C, F, R, K)<= \n")
@@ -249,7 +241,24 @@ def anak_ayam():
             print(f"sisa induknya")
             break
 
+def hasilTebak (coba):
+    tebak=random.randint(1,9)
+    tebakan = coba
+    
+    print(f"anda menebak {tebak} dengan {coba}")
+    if tebak != tebakan:
+        print("You Suck")
+    else:
+        print("Nice")
+    
+def jumlahTebakan ():
+    percobaan = int(input("masukan jumlah percobaan untuk menebak angka ="))
+    for i in range (percobaan):
+        hasilTebak(coba=percobaan)
+        i=+1
+    
 
+# ##################################  Pemanggilan Fungsi ###################################
 # cekHuruf()
 # genapGanjil()
 # kalkulator()
@@ -258,4 +267,5 @@ def anak_ayam():
 # Gacha()
 # arrayMahasiswa()
 # toko()
-anak_ayam()
+# anak_ayam()
+jumlahTebakan()
