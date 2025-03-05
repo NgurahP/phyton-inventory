@@ -257,6 +257,62 @@ def jumlahTebakan ():
         hasilTebak(coba=percobaan)
         i=+1
     
+import numpy as np
+
+def testNumpy():
+    ary = np.array([54,75,84,4,45,97,23])
+    cari = int(input("cari angka pada baris ke = "))
+    cariArray= cari-1
+    print(ary[cariArray])
+
+def testNumpy2Dimensi ():
+    arr = np.array([
+        [43,534,65],
+        [76,87,83]
+        ])
+    cari1 = int(input("cari angka pada baris ke = "))
+    cariArray1= cari1-1
+    cari2 = int(input("cari angka pada baris ke = "))
+    cariArray2= cari2-1
+    print(arr[cariArray1][cariArray2])
+
+def testNumpy3Dimensi ():
+    arr = np.array([
+            [
+                [43,534,65],
+                [79,92,43]
+            ],
+            [
+                [76,87,83],
+                [21,54,36]
+            ]
+        ])
+    print("Nilai Minimal = ", arr.min())
+    print("posisi Nilai Minimal = ", arr.argmin())
+    print("Nilai Maksimal = ", arr.max())
+      
+    print("shape = ", arr.shape)
+    print("Posisi Nilai Maksimal = ", arr.argmax())
+    print("Nilai Rata-rata = ", int(arr.mean()))
+    print("Total Nilai = ", arr.sum())
+    print("Nilai Deviasi= ", int(arr.std()))
+      
+    # for x in arr:
+    #     for y in x:
+    #         for z in y:
+    #             print(z)
+                
+    # cari1 = int(input("cari angka pada baris ke = "))
+    # cariArray1= cari1-1
+    # cari2 = int(input("cari angka pada baris ke = "))
+    # cariArray2= cari2-1
+    # cari3 = int(input("cari angka pada baris ke = "))
+    # cariArray3= cari3-1
+    # print(arr[cariArray1][cariArray2][cariArray3])
+    
+    
+# testNumpy2Dimensi()
+# testNumpy3Dimensi()
 
 # ##################################  Pemanggilan Fungsi ###################################
 # cekHuruf()
