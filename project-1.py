@@ -1,4 +1,5 @@
 import random
+import numpy as np
 
 def kalkulator():
     angka1 = input("Masukkan angka = ")
@@ -256,8 +257,6 @@ def jumlahTebakan ():
     for i in range (percobaan):
         hasilTebak(coba=percobaan)
         i=+1
-    
-import numpy as np
 
 def testNumpy():
     ary = np.array([54,75,84,4,45,97,23])
