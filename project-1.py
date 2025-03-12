@@ -308,6 +308,19 @@ def testNumpy3Dimensi ():
     # cari3 = int(input("cari angka pada baris ke = "))
     # cariArray3= cari3-1
     # print(arr[cariArray1][cariArray2][cariArray3])
+
+def ganti_kata(teks, kata_cari, kata_ganti, index=0):
+    if index >= len(teks):
+        return teks
+    else:
+        if teks[index:index + len(kata_cari)] == kata_cari:
+            teks = teks[:index] + kata_ganti + teks[index + len(kata_cari):]
+        return ganti_kata(teks, kata_cari, kata_ganti, index + 1)
+
+# Contoh teks
+teks = "Saya suka belajar Python. Python adalah bahasa pemrograman yang menyenangkan."
+print(teks)
+print(ganti_kata(teks, "Python", "Java"))
     
     
 # testNumpy2Dimensi()
