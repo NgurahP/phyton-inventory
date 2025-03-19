@@ -321,10 +321,31 @@ def ganti_kata(teks, kata_cari, kata_ganti, index=0):
 teks = "Saya suka belajar Python. Python adalah bahasa pemrograman yang menyenangkan."
 print(teks)
 print(ganti_kata(teks, "Python", "Java"))
-    
-    
-# testNumpy2Dimensi()
-# testNumpy3Dimensi()
+
+class Node():
+    def __init__(self, data=None, next=None, prev=None)-> None:
+        self.data = data
+        self.next = next
+        self.prev = prev
+        
+a=Node()
+a.data = "Tugas Pertama"
+
+b=Node()
+b.data = "Tugas kedua"
+b.prev = a
+a.next = b
+
+c=Node()
+c.data = "Tugas ketiga"
+c.prev=b
+b.next = c
+
+
+print (b.prev.data)
+print(a.data)
+print(a.next.data)
+print(a.next.next.data)
 
 # ##################################  Pemanggilan Fungsi ###################################
 # cekHuruf()
@@ -337,3 +358,5 @@ print(ganti_kata(teks, "Python", "Java"))
 # toko()
 # anak_ayam()
 jumlahTebakan()
+# testNumpy2Dimensi()
+# testNumpy3Dimensi()
