@@ -347,6 +347,74 @@ print(a.data)
 print(a.next.data)
 print(a.next.next.data)
 
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None  # Initialize next to None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def addNode(self, newData):
+        newNode = Node(newData)
+        if self.head is None:
+            self.head = newNode
+            self.tail = newNode  # Set tail to the new node
+        else:
+            self.tail.next = newNode  # Link the current tail to the new node
+            self.tail = newNode  # Update the tail to the new node
+    
+    def print(self):
+        node = self.head
+        while node is not None:
+            print(node.data)
+            node = node.next
+
+# Create a linked list and add nodes
+ll = LinkedList()
+ll.addNode('Jl. Tukad Pakerisan')
+ll.addNode('Jl. Tukad Yeh Aya')
+ll.addNode('Jl. Tukad Badung')
+ll.addNode('Jl. Tukad Barito')
+
+# Print the linked list
+ll.print()
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = []
+
+    def addNext(self, nNode):
+        self.next.append(nNode)
+    
+    def printNodeAndNext(self, pos=1):
+        print(pos * '-', self.data)
+        pos += 1
+        if self.next:
+            for nextNode in self.next:
+                nextNode.printNodeAndNext(pos)
+
+# Create nodes with data
+node1 = Node('Jl. Tukad Pakerisan')
+node2 = Node('Jl. Waturenggong')
+node3 = Node('Jl. Tukad Yeh Aya')
+node4 = Node('Jl. Rewemgn')
+node5 = Node('Jl. Cfhghjlk')
+node6 = Node('Jl. Poujn')
+
+# Build the tree structure
+node1.addNext(node2)
+node1.addNext(node3)
+node2.addNext(node4)
+node3.addNext(node5)
+node3.addNext(node6)
+
+# Print the tree structure
+node1.printNodeAndNext()
+
 # ##################################  Pemanggilan Fungsi ###################################
 # cekHuruf()
 # genapGanjil()
