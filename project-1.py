@@ -415,6 +415,27 @@ node3.addNext(node6)
 # Print the tree structure
 node1.printNodeAndNext()
 
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        self.sub = None
+        
+#Tugas Inti
+inti1 = Node("Bersih-Bersih")
+inti2 = Node("Mandi")
+inti3 = Node("Tidor")
+
+inti1.next=inti2
+inti2.next=inti3
+
+sub1_1 = Node("nyapu")
+sub1_2 = Node("nge-pel")
+
+inti1.sub = sub1_1
+sub1_1.sub = sub1_2
+sub1_2.next = inti2
+
 # ##################################  Pemanggilan Fungsi ###################################
 # cekHuruf()
 # genapGanjil()
