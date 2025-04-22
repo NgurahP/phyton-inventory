@@ -441,42 +441,111 @@ class Node:
         self.data = data
         self.next = None
 
-class LinkedListStack:
+# ===================================== Linked list with stack operation ==========================================
+import random
+
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class Checkpoint:
     def __init__(self):
-        self.top = None  # Menunjuk ke elemen teratas stack
+        self.top = None
 
-    def push(self, data):
-        new_node = Node(data)  # Buat node baru
-        new_node.next = self.top  # Node baru menunjuk ke node teratas saat ini
-        self.top = new_node  # Update node teratas menjadi node baru
+    def simpan_checkpoint(self, lokasi):
+        new_node = Node(lokasi)
+        new_node.next = self.top
+        self.top = new_node
+        print(f"Checkpoint disimpan di: {lokasi}")
 
-    def pop(self):
-        if self.is_empty():
-            print("Stack is empty!")
+    def memuat_checkpoint_terakhir(self):
+        if self.top is None:
+            print("Tidak ada checkpoint yang tersedia.")
             return None
-        popped_node = self.top  # Ambil node teratas
-        self.top = self.top.next  # Update node teratas ke node berikutnya
-        return popped_node.data  # Kembalikan data dari node yang dihapus
+        lokasi_terakhir = self.top.data
+        self.top = self.top.next
+        print(f"Kembali ke checkpoint: {lokasi_terakhir}")
+        return lokasi_terakhir
 
-    def peek(self):
-        if self.is_empty():
-            print("Stack is empty!")
-            return None
-        return self.top.data  # Kembalikan data dari node teratas
+    def lihat_checkpoint(self):
+        current = self.top
+        if current is None:
+            print("Belum ada checkpoint disimpan.")
+            return
+        print("Daftar checkpoint (terbaru ke paling lama):")
+        while current:
+            print(f"- {current.data}")
+            current = current.next
 
-    def is_empty(self):
-        return self.top is None  # Cek apakah stack kosong
+checkpoint = Checkpoint()
+soal_counter = 1
+soal_list = []  # Daftar untuk menyimpan soal yang telah diajukan
 
-# Contoh penggunaan
-stack = LinkedListStack()
-stack.push("Checkpoint 1")
-stack.push("Checkpoint 2")
-stack.push("Checkpoint 3")
+while True:
+    print("Apakah Anda ingin memulai permainan? (1/ya, 0/tidak)")
+    pilihan = input("Masukkan pilihan Anda: ")
 
-print("Top element:", stack.peek())  # Output: Top element: Checkpoint 3
+    if pilihan == '1':
+        if soal_counter > 1:  # Jika sudah ada soal sebelumnya, ambil dari daftar
+            angka1, angka2 = soal_list[-1]  # Ambil soal terakhir
+            print(f"{angka1} x {angka2} =...?")
+        else:  # Jika ini adalah soal pertama
+            angka1 = random.randint(1, 10)
+            angka2 = random.randint(1, 10)
+            soal_list.append((angka1, angka2))  # Simpan soal ke dalam daftar
+            print(f"{angka1} x {angka2} =...?")
 
-print("Popped element:", stack.pop())  # Output: Popped element: Checkpoint 3
-print("Top element after pop:", stack.peek())  # Output: Top element after pop: Checkpoint 2
+        jawaban_user = int(input("Masukkan jawaban Anda: "))  # Minta jawaban dari pengguna
+        jawaban_benar = angka1 * angka2
+
+        if jawaban_benar == jawaban_user:
+            lokasi = f"soal {soal_counter}"
+            checkpoint.simpan_checkpoint(lokasi)
+            soal_counter += 1
+
+            # Generate new random numbers for the next question only after correct answer
+            angka1 = random.randint(1, 10)
+            angka2 = random.randint(1, 10)
+            soal_list.append((angka1, angka2))  # Simpan soal baru ke dalam daftar
+        else:
+            print("Jawaban salah!")
+            print("Apakah Anda ingin melanjutkan permainan? (1/ya, 0/tidak)")
+            lanjut = input("Masukkan pilihan Anda: ")
+            if lanjut == '1':
+                # Kembali ke soal yang sama
+                print(f"{angka1} x {angka2} =...?")  # Tampilkan soal yang sama
+                jawaban_user = int(input("Masukkan jawaban Anda: "))  # Minta jawaban dari pengguna
+                if jawaban_benar == jawaban_user:
+                    lokasi = f"soal {soal_counter}"
+                    checkpoint.simpan_checkpoint(lokasi)
+                    soal_counter += 1
+
+                    # Generate new random numbers for the next question only after correct answer
+                    angka1 = random.randint(1, 10)
+                    angka2 = random.randint(1, 10)
+                    soal_list.append((angka1, angka2))  # Simpan soal baru ke dalam daftar
+                    print(f"{angka1} x {angka2} =...?")  # Tampilkan soal baru
+                else:
+                    print("Jawaban masih salah. Permainan berakhir.")
+                    print("Checkpoint terakhir Anda adalah:")
+                    checkpoint.lihat_checkpoint()
+                    print("Terima kasih telah bermain!")
+                    break
+            elif lanjut == '0':
+                print("Checkpoint terakhir Anda adalah:")
+                checkpoint.lihat_checkpoint()
+                print("Terima kasih telah bermain!")
+                break
+            else:
+                print("Pilihan tidak valid. Silakan masukkan 1 untuk ya atau 0 untuk tidak.")
+    elif pilihan == '0':
+        print("Checkpoint terakhir Anda adalah:")
+        checkpoint.lihat_checkpoint()
+        print("Terima kasih telah bermain!")
+        break
+    else:
+        print("Pilihan tidak valid. Silakan masukkan 1 untuk ya atau 0 untuk tidak.")
 
 # ##################################  Pemanggilan Fungsi ###################################
 # cekHuruf()
