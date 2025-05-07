@@ -445,28 +445,30 @@ class Node:
 import random
 
 class Node:
-    def __init__(self, data):
-        self.data = data
+    def __init__(self, lokasi, soal):
+        self.lokasi = lokasi
+        self.soal = soal  # soal is a tuple (angka1, angka2)
         self.next = None
 
 class Checkpoint:
     def __init__(self):
         self.top = None
 
-    def simpan_checkpoint(self, lokasi):
-        new_node = Node(lokasi)
+    def simpan_checkpoint(self, lokasi, soal):
+        new_node = Node(lokasi, soal)
         new_node.next = self.top
         self.top = new_node
-        print(f"Checkpoint disimpan di: {lokasi}")
+        print(f"Checkpoint disimpan di: {lokasi} dengan soal {soal[0]} x {soal[1]}")
 
     def memuat_checkpoint_terakhir(self):
         if self.top is None:
             print("Tidak ada checkpoint yang tersedia.")
-            return None
-        lokasi_terakhir = self.top.data
+            return None, None
+        lokasi_terakhir = self.top.lokasi
+        soal_terakhir = self.top.soal
         self.top = self.top.next
-        print(f"Kembali ke checkpoint: {lokasi_terakhir}")
-        return lokasi_terakhir
+        print(f"Kembali ke checkpoint: {lokasi_terakhir} dengan soal {soal_terakhir[0]} x {soal_terakhir[1]}")
+        return lokasi_terakhir, soal_terakhir
 
     def lihat_checkpoint(self):
         current = self.top
@@ -475,77 +477,89 @@ class Checkpoint:
             return
         print("Daftar checkpoint (terbaru ke paling lama):")
         while current:
-            print(f"- {current.data}")
+            print(f"- {current.lokasi} : {current.soal[0]} x {current.soal[1]}")
             current = current.next
 
-checkpoint = Checkpoint()
-soal_counter = 1
-soal_list = []  # Daftar untuk menyimpan soal yang telah diajukan
+def main():
+    checkpoint = Checkpoint()
+    soal_list = []
+    soal_counter = 1
 
-while True:
-    print("Apakah Anda ingin memulai permainan? (1/ya, 0/tidak)")
-    pilihan = input("Masukkan pilihan Anda: ")
+    while True:
+        print("Apakah Anda ingin memulai permainan? (1/ya, 0/tidak)")
+        pilihan = input("Masukkan pilihan Anda: ")
 
-    if pilihan == '1':
-        if soal_counter > 1:  # Jika sudah ada soal sebelumnya, ambil dari daftar
-            angka1, angka2 = soal_list[-1]  # Ambil soal terakhir
-            print(f"{angka1} x {angka2} =...?")
-        else:  # Jika ini adalah soal pertama
-            angka1 = random.randint(1, 10)
-            angka2 = random.randint(1, 10)
-            soal_list.append((angka1, angka2))  # Simpan soal ke dalam daftar
-            print(f"{angka1} x {angka2} =...?")
+        if pilihan == '1':
+            # Load last question or new question
+            if soal_counter > 1 and soal_list:
+                angka1, angka2 = soal_list[-1]
+                print(f"{angka1} x {angka2} =...?")
+            else:
+                angka1 = random.randint(1, 10)
+                angka2 = random.randint(1, 10)
+                soal_list.append((angka1, angka2))
+                print(f"{angka1} x {angka2} =...?")
 
-        jawaban_user = int(input("Masukkan jawaban Anda: "))  # Minta jawaban dari pengguna
-        jawaban_benar = angka1 * angka2
+            try:
+                jawaban_user = int(input("Masukkan jawaban Anda: "))
+            except ValueError:
+                print("Input tidak valid. Silakan masukkan angka.")
+                continue
 
-        if jawaban_benar == jawaban_user:
-            lokasi = f"soal {soal_counter}"
-            checkpoint.simpan_checkpoint(lokasi)
-            soal_counter += 1
+            jawaban_benar = angka1 * angka2
 
-            # Generate new random numbers for the next question only after correct answer
-            angka1 = random.randint(1, 10)
-            angka2 = random.randint(1, 10)
-            soal_list.append((angka1, angka2))  # Simpan soal baru ke dalam daftar
-        else:
-            print("Jawaban salah!")
-            print("Apakah Anda ingin melanjutkan permainan? (1/ya, 0/tidak)")
-            lanjut = input("Masukkan pilihan Anda: ")
-            if lanjut == '1':
-                # Kembali ke soal yang sama
-                print(f"{angka1} x {angka2} =...?")  # Tampilkan soal yang sama
-                jawaban_user = int(input("Masukkan jawaban Anda: "))  # Minta jawaban dari pengguna
-                if jawaban_benar == jawaban_user:
-                    lokasi = f"soal {soal_counter}"
-                    checkpoint.simpan_checkpoint(lokasi)
-                    soal_counter += 1
+            if jawaban_benar == jawaban_user:
+                lokasi = f"soal {soal_counter}"
+                checkpoint.simpan_checkpoint(lokasi, (angka1, angka2))
+                soal_counter += 1
 
-                    # Generate new random numbers for the next question only after correct answer
-                    angka1 = random.randint(1, 10)
-                    angka2 = random.randint(1, 10)
-                    soal_list.append((angka1, angka2))  # Simpan soal baru ke dalam daftar
-                    print(f"{angka1} x {angka2} =...?")  # Tampilkan soal baru
-                else:
-                    print("Jawaban masih salah. Permainan berakhir.")
+                angka1 = random.randint(1, 10)
+                angka2 = random.randint(1, 10)
+                soal_list.append((angka1, angka2))
+            else:
+                print("Jawaban salah!")
+                print("Apakah Anda ingin melanjutkan permainan? (1/ya, 0/tidak)")
+                lanjut = input("Masukkan pilihan Anda: ")
+                if lanjut == '1':
+                    print(f"{angka1} x {angka2} =...?")
+                    try:
+                        jawaban_user = int(input("Masukkan jawaban Anda: "))
+                    except ValueError:
+                        print("Input tidak valid. Silakan masukkan angka.")
+                        continue
+                    if jawaban_benar == jawaban_user:
+                        lokasi = f"soal {soal_counter}"
+                        checkpoint.simpan_checkpoint(lokasi, (angka1, angka2))
+                        soal_counter += 1
+
+                        angka1 = random.randint(1, 10)
+                        angka2 = random.randint(1, 10)
+                        soal_list.append((angka1, angka2))
+                        print(f"{angka1} x {angka2} =...?")
+                    else:
+                        print("Jawaban masih salah. Permainan berakhir.")
+                        print("Checkpoint terakhir Anda adalah:")
+                        checkpoint.lihat_checkpoint()
+                        print("Terima kasih telah bermain!")
+                        break
+                elif lanjut == '0':
                     print("Checkpoint terakhir Anda adalah:")
                     checkpoint.lihat_checkpoint()
                     print("Terima kasih telah bermain!")
                     break
-            elif lanjut == '0':
-                print("Checkpoint terakhir Anda adalah:")
-                checkpoint.lihat_checkpoint()
-                print("Terima kasih telah bermain!")
-                break
-            else:
-                print("Pilihan tidak valid. Silakan masukkan 1 untuk ya atau 0 untuk tidak.")
-    elif pilihan == '0':
-        print("Checkpoint terakhir Anda adalah:")
-        checkpoint.lihat_checkpoint()
-        print("Terima kasih telah bermain!")
-        break
-    else:
-        print("Pilihan tidak valid. Silakan masukkan 1 untuk ya atau 0 untuk tidak.")
+                else:
+                    print("Pilihan tidak valid. Silakan masukkan 1 untuk ya atau 0 untuk tidak.")
+        elif pilihan == '0':
+            print("Checkpoint terakhir Anda adalah:")
+            checkpoint.lihat_checkpoint()
+            print("Terima kasih telah bermain!")
+            break
+        else:
+            print("Pilihan tidak valid. Silakan masukkan 1 untuk ya atau 0 untuk tidak.")
+
+if __name__ == "__main__":
+    main()
+    
 
 # ##################################  Pemanggilan Fungsi ###################################
 # cekHuruf()
