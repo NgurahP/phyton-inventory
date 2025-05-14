@@ -561,6 +561,46 @@ if __name__ == "__main__":
     main()
     
 
+===============================================Traversing Tree======================================================
+class Node():
+    def __init__ (self, data):
+        self.data = data
+        self.next = [None]*2
+        
+    def traversing(self, level=1):
+        print("level =",level,", data = ", self.data)
+        if not self.next[0] == None:
+            self.next[0].traversing(level+1)
+        if not self.next[1] == None:
+            self.next[1].traversing(level+1)
+
+root = Node("ancestor")
+parent1 = Node("parent1")
+parent2 = Node("parent2")
+root.next[0] = parent1
+root.next[1] = parent2
+
+child1 = Node("child1")
+child2 = Node("child2")
+child3 = Node("child3")
+child4 = Node("child4")
+
+parent1.next[0] = child1
+parent1.next[1] = child2
+
+parent2.next[0] = child3
+parent2.next[1] = child4
+
+print(root.data)
+print(root.next[0].data)
+print(root.next[1].data)
+print(root.next[0].next[0].data)
+print(root.next[0].next[1].data)
+print(root.next[1].next[0].data)
+print(root.next[1].next[1].data)
+
+root.traversing()
+
 # ##################################  Pemanggilan Fungsi ###################################
 # cekHuruf()
 # genapGanjil()
